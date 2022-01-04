@@ -16,10 +16,14 @@ int main() {
     int *arr = (int*)malloc(MAX_SIZE * sizeof(int));
     init_data(arr, MAX_SIZE);
 
-    volatile int sink;
+    // warm up
+    for (int i=0; i<MAX_SIZE; ++i) {
+        arr[i] *= 3;
+    }
+
     start = clock();
     for (int i=0; i<MAX_SIZE; ++i) {
-        sink = arr[i];
+        arr[i] *= 3;
     }
     end = clock();
     cpu_time = ((double)(end - start)) /  CLOCKS_PER_SEC * 1000;

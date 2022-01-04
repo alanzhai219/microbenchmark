@@ -8,17 +8,21 @@ int main() {
     double cpu_time;
 
     int *arr = (int*)malloc(MAX_SIZE * sizeof(int));
+    // warm up
+    for (int i=0; i<MAX_SIZE; ++i) {
+        arr[i] += 3;
+    }
 
     start = clock();
     for (int i=0; i<MAX_SIZE; ++i) {
-        arr[i] *= 3;
+        arr[i] += 3;
     }
     end = clock();
     cpu_time = ((double)(end - start)) /  CLOCKS_PER_SEC;
 
     printf("cpu time for loop 1 %.6f secs.\n", cpu_time);
 
-    for (int j=8; j<32; j++) {
+    for (int j=16; j<32; j++) {
         start = clock();
         for (int i=0; i<MAX_SIZE; i+=j) {
             arr[i] *= 3;
